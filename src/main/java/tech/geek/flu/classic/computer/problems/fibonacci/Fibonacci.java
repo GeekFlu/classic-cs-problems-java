@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 /**
  * Fibonacci Sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21...
@@ -14,8 +15,8 @@ import java.util.stream.IntStream;
  */
 @Slf4j
 public class Fibonacci {
-  int last = 0; // fib(0)
-  int next = 1; // fib(1)
+  long last = 0; // fib(0)
+  long next = 1; // fib(1)
 
   // Map.of() was introduced in Java 9 but returns
   // an immutable Map
@@ -46,9 +47,9 @@ public class Fibonacci {
    * Generating Fibonacci numbers with a stream
    * @return Fibonacci Stream
    */
-  public IntStream stream() {
-    return IntStream.generate(() -> {
-      int oldLast = last;
+  public LongStream stream() {
+    return LongStream.generate(() -> {
+      long oldLast = last;
       last = next;
       next = oldLast + next;
       return oldLast;
@@ -62,6 +63,6 @@ public class Fibonacci {
     log.info("Fib(45) = {}", fib4(45));
 
     Fibonacci fibonacci = new Fibonacci();
-    fibonacci.stream().limit(41).forEachOrdered(value -> log.info("Fib = {}", value));
+    fibonacci.stream().limit(141).forEachOrdered(value -> log.info("Fib = {}", value));
   }
 }
