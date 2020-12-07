@@ -10,9 +10,9 @@ class FibonacciTest {
   @Test
   void test_fibonacci_recursively(){
     long start = System.currentTimeMillis();
-    long result = Fibonacci.fib1(45);
-    log.info("Fib 45 = {}, execution time = {}", result, System.currentTimeMillis() - start);
-    Assertions.assertEquals(1134903170, result);
+    long result = Fibonacci.fib1(47);
+    log.info("Fib 47 = {}, execution time = {}", result, System.currentTimeMillis() - start);
+    Assertions.assertEquals(2971215073L, result);
   }
 
   @Test
