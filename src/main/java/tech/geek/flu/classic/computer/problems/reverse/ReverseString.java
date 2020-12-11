@@ -1,7 +1,10 @@
 package tech.geek.flu.classic.computer.problems.reverse;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Objects;
 
+@Slf4j
 public class ReverseString {
   public static String reverse(String inputStr) {
     if (Objects.isNull(inputStr) || inputStr.length() == 0) {
@@ -23,8 +26,8 @@ public class ReverseString {
 
   public static void main(String[] args) {
     String inputStr = "Luis";
-    System.out.println(reverse(inputStr));
-    System.out.println(reverse("anitalavalatina"));
-    System.out.println(reverse("abcdefghijk"));
+    log.info(reverse(inputStr));
+    log.info(reverse("anitalavalatina"));
+    log.info(reverse("abcdefghijk"));
   }
 }
