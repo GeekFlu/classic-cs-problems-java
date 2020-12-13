@@ -13,4 +13,6 @@ public interface LinkedListIfc<T> {
   void reverse() throws LinkedListException;
   boolean isEmpty();
   String print();
+  Node<T> getHead();
+  void setHead(Node<T> head);
 }

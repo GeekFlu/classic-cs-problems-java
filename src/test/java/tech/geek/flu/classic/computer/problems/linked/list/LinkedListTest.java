@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedList;
+import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListIfc;
+import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListUtils;
 import tech.geek.flu.classic.computer.datastructres.linked.list.Node;
 import tech.geek.flu.classic.computer.exception.LinkedListException;
 
@@ -129,6 +131,27 @@ class LinkedListTest {
     LinkedList<String> ll = new LinkedList<>();
     Exception exception = Assertions.assertThrows(LinkedListException.class, ll::reverse);
     Assertions.assertTrue(exception.getMessage().contains("Cannot reverse a linked list"));
+  }
+
+  @Test
+  void test_merge() {
+    LinkedList<Integer> linkedList1 = new LinkedList<>();
+    linkedList1.append(110);
+    linkedList1.append(210);
+    linkedList1.append(310);
+    linkedList1.append(410);
+
+    LinkedList<Integer> linkedList2 = new LinkedList<>();
+    linkedList2.append(120);
+    linkedList2.append(220);
+    linkedList2.append(320);
+    linkedList2.append(520);
+    log.info("Merging linked list = {} and linked list = {}", linkedList1.print(), linkedList2.print());
+    LinkedListIfc<Integer> mergedList = LinkedListUtils.mergeSortedLists(linkedList1, linkedList2, 3);
+    log.info("Merged Linked List = {}", mergedList.print());
+    List<Integer> expected = List.of(110, 120, 210, 220, 310, 320, 410, 520);
+    Assertions.assertEquals(expected, mergedList.toList());
+
   }
 
 }
