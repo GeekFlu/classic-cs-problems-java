@@ -1,5 +1,7 @@
 package tech.geek.flu.classic.computer.datastructres.linked.list;
 
+import tech.geek.flu.classic.computer.exception.LinkedListException;
+
 import java.util.List;
 
 public interface LinkedListIfc<T> {
@@ -8,5 +10,7 @@ public interface LinkedListIfc<T> {
   boolean prepend(T value);
   Node<T> search(T value);
   boolean remove(T value);
-  void reverse();
+  void reverse() throws LinkedListException;
+  boolean isEmpty();
+  String print();
 }
