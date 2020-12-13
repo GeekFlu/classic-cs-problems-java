@@ -21,7 +21,7 @@ public class LinkedList<T> implements LinkedListIfc<T> {
     if (Objects.isNull(this.head)) {
       this.head = new Node<>(value);
     } else {
-      Node<T> n = buildNode(value);
+      Node<T> n = LinkedListUtils.buildNode(value);
       Node<T> current = this.head;
       while (Objects.nonNull(current.getNext())) {
         current = current.getNext();
@@ -30,12 +30,6 @@ public class LinkedList<T> implements LinkedListIfc<T> {
     }
     this.size++;
     return true;
-  }
-
-  private Node<T> buildNode(T value) {
-    return Node.<T>builder()
-        .value(value)
-        .build();
   }
 
   @Override
@@ -57,7 +51,7 @@ public class LinkedList<T> implements LinkedListIfc<T> {
     if (Objects.isNull(this.head)) {
       this.head = new Node<>(value);
     } else {
-      Node<T> n = buildNode(value);
+      Node<T> n = LinkedListUtils.buildNode(value);
       n.setNext(this.head);
       this.head = n;
     }
@@ -135,5 +129,10 @@ public class LinkedList<T> implements LinkedListIfc<T> {
     return this.toList().stream()
         .map(String::valueOf)
         .collect(Collectors.joining(" -> "));
+  }
+
+  @Override
+  public void setHead(Node<T> head) {
+    this.head = head;
   }
 }
