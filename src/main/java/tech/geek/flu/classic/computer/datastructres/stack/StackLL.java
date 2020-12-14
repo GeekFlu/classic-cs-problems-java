@@ -63,7 +63,7 @@ public class StackLL<T> implements StackIfc<T> {
     Node<T> current = this.top;
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("\n|top of stack|\n");
-    while (Objects.nonNull(current)){
+    while (Objects.nonNull(current)) {
       stringBuilder.append(String.format(LinkedListUtils.TO_STR_TEMPLATE, current.getValue()));
       current = current.getNext();
     }
@@ -72,6 +72,17 @@ public class StackLL<T> implements StackIfc<T> {
 
   @Override
   public void reverse() {
-    return;
+    if (top == null) {
+      return;
+    }
+    Node<T> prev = null;
+    Node<T> current = this.top;
+    while (Objects.nonNull(current)) {
+      Node<T> next = current.getNext();
+      current.setNext(prev);
+      prev = current;
+      current = next;
+    }
+    this.top = prev;
   }
 }
