@@ -2,6 +2,7 @@ package tech.geek.flu.classic.computer.datastructres.stack;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListUtils;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -15,7 +16,6 @@ public class StackArray<T> implements StackIfc<T> {
   private int top;
   private int tail;
   private int capacity;
-  private static final String TO_STR_TEMPLATE = "|%s|\n";
   private Class<T> classOfT;
 
   public StackArray(Class<T> clazz) {
@@ -82,7 +82,7 @@ public class StackArray<T> implements StackIfc<T> {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("\n|top of stack|\n");
     while (tempTop >= 0){
-      stringBuilder.append(String.format(TO_STR_TEMPLATE, this.arr[tempTop]));
+      stringBuilder.append(String.format(LinkedListUtils.TO_STR_TEMPLATE, this.arr[tempTop]));
       tempTop--;
     }
     return stringBuilder.toString();

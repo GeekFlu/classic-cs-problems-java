@@ -3,13 +3,16 @@ package tech.geek.flu.classic.computer.datastructres.stack;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListUtils;
 import tech.geek.flu.classic.computer.datastructres.linked.list.Node;
+
+import java.util.Objects;
 
 @Slf4j
 @Getter
 @Setter
 public class StackLL<T> implements StackIfc<T> {
-  private Node<T> head;
+  private Node<T> top;
   private int size;
 
   @Override
@@ -17,37 +20,58 @@ public class StackLL<T> implements StackIfc<T> {
     if (this.isEmpty()) {
       return null;
     }
-
-    return null;
+    T value = this.top.getValue();
+    this.top = this.top.getNext();
+    this.size--;
+    return value;
   }
 
   @Override
   public T top() {
-    return null;
+    if (Objects.isNull(this.top))
+      return null;
+    this.size--;
+    return this.top.getValue();
   }
 
   @Override
   public boolean push(T value) {
-    return false;
+    Node<T> node = new Node<>(value);
+    if (!Objects.isNull(this.top)) {
+      node.setNext(this.getTop());
+    }
+    this.top = node;
+    this.size++;
+    return true;
   }
 
   @Override
   public int size() {
-    return 0;
+    return this.size;
   }
 
   @Override
   public boolean isEmpty() {
-    return false;
+    return this.size <= 0;
   }
 
   @Override
   public String print() {
-    return null;
+    if (this.isEmpty()) {
+      return "\n<EMPTY STACK>";
+    }
+    Node<T> current = this.top;
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("\n|top of stack|\n");
+    while (Objects.nonNull(current)){
+      stringBuilder.append(String.format(LinkedListUtils.TO_STR_TEMPLATE, current.getValue()));
+      current = current.getNext();
+    }
+    return stringBuilder.toString();
   }
 
   @Override
   public void reverse() {
-
+    return;
   }
 }

@@ -9,7 +9,7 @@ import tech.geek.flu.classic.computer.problems.TestUtils;
 import java.util.List;
 
 @Slf4j
-class StackTest {
+class StackArrayTest {
 
   @Test
   void stack_array_creation(){
