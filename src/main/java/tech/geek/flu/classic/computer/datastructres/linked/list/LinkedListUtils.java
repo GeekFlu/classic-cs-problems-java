@@ -6,6 +6,7 @@ import java.util.Objects;
 
 @Slf4j
 public class LinkedListUtils {
+  public static final String TO_STR_TEMPLATE = "|%s|\n";
   private LinkedListUtils() {
   }
 
