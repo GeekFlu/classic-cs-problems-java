@@ -63,9 +63,11 @@ public class StackLL<T> implements StackIfc<T> {
     Node<T> current = this.top;
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("\n|top of stack|\n");
-    while (Objects.nonNull(current)) {
+    int counter = 0;
+    while (counter < 25 && Objects.nonNull(current)) {
       stringBuilder.append(String.format(LinkedListUtils.TO_STR_TEMPLATE, current.getValue()));
       current = current.getNext();
+      counter++;
     }
     return stringBuilder.toString();
   }

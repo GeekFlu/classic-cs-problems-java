@@ -55,4 +55,36 @@ class StackLinkedListTest {
     Assertions.assertTrue(integerStackLL.isEmpty());
     log.info("{}", integerStackLL.print());
   }
+
+  @Test
+  void test_reverse_stack() {
+    StackLL<String> stringStackLL = new StackLL<>();
+    stringStackLL.push("H");
+    stringStackLL.push("o");
+    stringStackLL.push("l");
+    stringStackLL.push("a");
+    stringStackLL.push(" ");
+    stringStackLL.push("M");
+    stringStackLL.push("u");
+    stringStackLL.push("n");
+    stringStackLL.push("d");
+    stringStackLL.push("o");
+    stringStackLL.push("!");
+    Assertions.assertEquals("!", stringStackLL.top());
+    log.info("Stack Before reversing {}", stringStackLL.print());
+    stringStackLL.reverse();
+    log.info("Stack After reversing {}", stringStackLL.print());
+    Assertions.assertEquals("H", stringStackLL.top());
+
+    List<Integer> integerList = TestUtils.getSampleData(30000);
+    int first = integerList.get(0);
+    int last = integerList.get(integerList.size() - 1);
+    StackLL<Integer> stackOfInst = new StackLL<>();
+    integerList.forEach(stackOfInst::push);
+    log.info("Stack Before reversing + {}", stackOfInst.print());
+    Assertions.assertEquals(last, stackOfInst.top());
+    stackOfInst.reverse();
+    log.info("Stack After reversing + {}", stackOfInst.print());
+    Assertions.assertEquals(first, stackOfInst.top());
+  }
 }
