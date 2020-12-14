@@ -6,4 +6,5 @@ public interface QueueIfc<T> {
   int size();
   T front();
   boolean isEmpty();
+  String print();
 }

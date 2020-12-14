@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import tech.geek.flu.classic.computer.datastructres.queue.QueueArray;
 import tech.geek.flu.classic.computer.problems.TestUtils;
 
-import java.util.List;
 
 @Slf4j
 class QueueArrayTest {
@@ -24,6 +23,7 @@ class QueueArrayTest {
     queueArray.enqueue("Persona 1");
     queueArray.enqueue("Persona 2");
     Assertions.assertEquals("Persona 1", queueArray.front());
+    log.info("{}", queueArray.print());
   }
 
   @Test
@@ -32,6 +32,7 @@ class QueueArrayTest {
     TestUtils.getSampleData(250)
         .forEach(queueArray::enqueue);
     Assertions.assertEquals(250, queueArray.size());
+    log.info("{}", queueArray.print());
     while (!queueArray.isEmpty()) {
       queueArray.dequeue();
     }

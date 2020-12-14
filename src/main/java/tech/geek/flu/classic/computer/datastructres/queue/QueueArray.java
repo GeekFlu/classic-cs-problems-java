@@ -1,6 +1,8 @@
 package tech.geek.flu.classic.computer.datastructres.queue;
 
 import lombok.extern.slf4j.Slf4j;
+import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedList;
+import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListUtils;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -68,5 +70,22 @@ public class QueueArray<T> implements QueueIfc<T> {
   @Override
   public boolean isEmpty() {
     return this.size <= 0;
+  }
+
+  @Override
+  public String print() {
+    if(this.isEmpty()){
+      return "\n<QUEUE IS EMPTY>";
+    }
+    StringBuilder stringBuilder = new StringBuilder();
+    int front = this.head;
+    stringBuilder.append("\n|Front of QUEUE|\n");
+    int counter = 0;
+    while (counter < 10 && front < this.tail) {
+      stringBuilder.append(String.format(LinkedListUtils.TO_STR_TEMPLATE, this.arr[front]));
+      counter++;
+      front++;
+    }
+    return stringBuilder.toString();
   }
 }
