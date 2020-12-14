@@ -14,6 +14,10 @@ public class StackLL<T> implements StackIfc<T> {
 
   @Override
   public T pop() {
+    if (this.isEmpty()) {
+      return null;
+    }
+
     return null;
   }
 
@@ -35,5 +39,15 @@ public class StackLL<T> implements StackIfc<T> {
   @Override
   public boolean isEmpty() {
     return false;
+  }
+
+  @Override
+  public String print() {
+    return null;
+  }
+
+  @Override
+  public void reverse() {
+
   }
 }

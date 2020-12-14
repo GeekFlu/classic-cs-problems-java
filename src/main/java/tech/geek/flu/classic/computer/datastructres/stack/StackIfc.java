@@ -6,4 +6,6 @@ public interface StackIfc<T> {
   boolean push(T value);
   int size();
   boolean isEmpty();
+  String print();
+  void reverse();
 }
