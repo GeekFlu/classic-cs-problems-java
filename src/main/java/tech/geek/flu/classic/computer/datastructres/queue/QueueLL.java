@@ -57,6 +57,13 @@ public class QueueLL<T> implements QueueIfc<T> {
   }
 
   @Override
+  public T tail() {
+    if (this.isEmpty())
+      return null;
+    return this.tail.getValue();
+  }
+
+  @Override
   public boolean isEmpty() {
     return this.size <= 0;
   }
@@ -90,8 +97,13 @@ public class QueueLL<T> implements QueueIfc<T> {
     }
     Node<T> prev = null;
     Node<T> current = this.front;
+    this.tail = this.front;
     while (Objects.nonNull(current)) {
       Node<T> next = current.getNext();
+      current.setNext(prev);
+      prev = current;
+      current = next;
     }
+    this.front = prev;
   }
 }

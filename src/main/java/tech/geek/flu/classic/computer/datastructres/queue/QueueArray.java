@@ -67,6 +67,11 @@ public class QueueArray<T> implements QueueIfc<T> {
   }
 
   @Override
+  public T tail() {
+    return null;
+  }
+
+  @Override
   public boolean isEmpty() {
     return this.size <= 0;
   }

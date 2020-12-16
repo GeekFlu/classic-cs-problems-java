@@ -5,6 +5,7 @@ public interface QueueIfc<T> {
   boolean enqueue(T value);
   int size();
   T front();
+  T tail();
   boolean isEmpty();
   String print();
   void reverse();

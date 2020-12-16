@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tech.geek.flu.classic.computer.datastructres.queue.QueueLL;
+import tech.geek.flu.classic.computer.problems.TestUtils;
+
+import java.util.List;
 
 /**
  * Test class for Queue implemented using a Linked list
@@ -60,6 +63,22 @@ class QueueLinkedLLTest {
     integerQueueLL.enqueue(33);
     integerQueueLL.print();
     Assertions.assertTrue(integerQueueLL.print().contains("showing 25"));
+  }
+
+  @Test
+  void test_reverse() {
+    QueueLL<Integer> integerQueueLL = new QueueLL<>(Integer.class);
+    List<Integer> sampleData = TestUtils.getSampleData(10);
+    int first = sampleData.get(0);
+    int last = sampleData.get(sampleData.size() - 1);
+    for(Integer i : sampleData) {
+      integerQueueLL.enqueue(i);
+    }
+    log.info("Before REversing Queue = {}", integerQueueLL.print());
+    integerQueueLL.reverse();
+    log.info("After REversing Queue = {}", integerQueueLL.print());
+    Assertions.assertEquals(last, integerQueueLL.front());
+    Assertions.assertEquals(first, integerQueueLL.tail());
   }
 
 }
