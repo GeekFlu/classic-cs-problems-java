@@ -1,7 +1,6 @@
 package tech.geek.flu.classic.computer.datastructres.queue;
 
 import lombok.extern.slf4j.Slf4j;
-import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedList;
 import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListUtils;
 
 import java.lang.reflect.Array;
