@@ -87,4 +87,9 @@ public class QueueArray<T> implements QueueIfc<T> {
     }
     return stringBuilder.toString();
   }
+
+  @Override
+  public void reverse() {
+
+  }
 }

@@ -1,7 +1,10 @@
 package tech.geek.flu.classic.computer.datastructres.queue;
 
 import lombok.extern.slf4j.Slf4j;
+import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListUtils;
 import tech.geek.flu.classic.computer.datastructres.linked.list.Node;
+
+import java.util.Objects;
 
 @Slf4j
 public class QueueLL<T> implements QueueIfc<T> {
@@ -17,7 +20,14 @@ public class QueueLL<T> implements QueueIfc<T> {
 
   @Override
   public T dequeue() {
-    return null;
+    if (this.size() <= 0) {
+      return null;
+    }
+    Node<T> node = this.front;
+    T value = node.getValue();
+    this.front = front.getNext();
+    this.size--;
+    return value;
   }
 
   @Override
@@ -36,7 +46,7 @@ public class QueueLL<T> implements QueueIfc<T> {
 
   @Override
   public int size() {
-    return 0;
+    return this.size;
   }
 
   @Override
@@ -53,6 +63,35 @@ public class QueueLL<T> implements QueueIfc<T> {
 
   @Override
   public String print() {
-    return null;
+    if (this.size() <= 0) {
+      return "<QUEUE is EMPTY!>";
+    }
+    StringBuilder stringBuilder = new StringBuilder();
+    Node<T> current = this.front;
+    stringBuilder.append("\n|Front of Queue|\n");
+    int counter = 0;
+    while (counter < 25 && Objects.nonNull(current)) {
+      stringBuilder.append(String.format(LinkedListUtils.TO_STR_TEMPLATE, current.getValue()));
+      current = current.getNext();
+      counter++;
+    }
+
+    if (counter >= 25) {
+      stringBuilder.append("| showing 25 first elements... |");
+    }
+
+    return stringBuilder.toString();
+  }
+
+  @Override
+  public void reverse() {
+    if (this.size() <= 0) {
+      return;
+    }
+    Node<T> prev = null;
+    Node<T> current = this.front;
+    while (Objects.nonNull(current)) {
+      Node<T> next = current.getNext();
+    }
   }
 }

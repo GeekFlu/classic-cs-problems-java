@@ -7,4 +7,5 @@ public interface QueueIfc<T> {
   T front();
   boolean isEmpty();
   String print();
+  void reverse();
 }
