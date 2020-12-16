@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class QueueArray<T> implements QueueIfc<T> {
   private T[] arr;
   private int size;
-  private int head;
+  private int front;
   private int tail;
   private Class<T> typeOfT;
   private int capacity;
@@ -21,7 +21,7 @@ public class QueueArray<T> implements QueueIfc<T> {
 
   public QueueArray(Class<T> tClass, int capacity) {
     this.size = 0;
-    this.head = 0;
+    this.front = 0;
     this.tail = 0;
     this.typeOfT = tClass;
     this.capacity = capacity;
@@ -33,9 +33,9 @@ public class QueueArray<T> implements QueueIfc<T> {
     if (this.isEmpty()){
       return null;
     }
-    T val = this.arr[this.head];
-    this.arr[this.head] = null;
-    this.head++;
+    T val = this.arr[this.front];
+    this.arr[this.front] = null;
+    this.front++;
     this.size--;
     return val;
   }
@@ -63,12 +63,12 @@ public class QueueArray<T> implements QueueIfc<T> {
     if (this.isEmpty()) {
       return null;
     }
-    return this.arr[this.head];
+    return this.arr[this.front];
   }
 
   @Override
   public T tail() {
-    return null;
+    return this.arr[this.tail - 1];
   }
 
   @Override
@@ -82,7 +82,7 @@ public class QueueArray<T> implements QueueIfc<T> {
       return "\n<QUEUE IS EMPTY>";
     }
     StringBuilder stringBuilder = new StringBuilder();
-    int front = this.head;
+    int front = this.front;
     stringBuilder.append("\n|Front of QUEUE|\n");
     int counter = 0;
     while (counter < 10 && front < this.tail) {
@@ -95,6 +95,17 @@ public class QueueArray<T> implements QueueIfc<T> {
 
   @Override
   public void reverse() {
-
+    if (this.isEmpty()) {
+      return;
+    }
+    int i = this.front;
+    int j = this.tail - 1;
+    while (i < j) {
+      T temp = this.arr[i];
+      this.arr[i] = this.arr[j];
+      this.arr[j] = temp;
+      i++;
+      j--;
+    }
   }
 }

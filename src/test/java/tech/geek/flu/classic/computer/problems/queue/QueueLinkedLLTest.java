@@ -68,7 +68,7 @@ class QueueLinkedLLTest {
   @Test
   void test_reverse() {
     QueueLL<Integer> integerQueueLL = new QueueLL<>(Integer.class);
-    List<Integer> sampleData = TestUtils.getSampleData(10);
+    List<Integer> sampleData = TestUtils.getSampleData(10000);
     int first = sampleData.get(0);
     int last = sampleData.get(sampleData.size() - 1);
     for(Integer i : sampleData) {

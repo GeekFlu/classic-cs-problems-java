@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import tech.geek.flu.classic.computer.datastructres.queue.QueueArray;
 import tech.geek.flu.classic.computer.problems.TestUtils;
 
+import java.util.List;
+
 
 @Slf4j
 class QueueArrayTest {
@@ -37,6 +39,22 @@ class QueueArrayTest {
       queueArray.dequeue();
     }
     Assertions.assertEquals(0, queueArray.size());
+  }
+
+  @Test
+  void test_reverse() {
+    QueueArray<Integer> integerQueueLL = new QueueArray<>(Integer.class);
+    List<Integer> sampleData = TestUtils.getSampleData(10000);
+    int first = sampleData.get(0);
+    int last = sampleData.get(sampleData.size() - 1);
+    for(Integer i : sampleData) {
+      integerQueueLL.enqueue(i);
+    }
+    log.info("Before REversing Queue = {}", integerQueueLL.print());
+    integerQueueLL.reverse();
+    log.info("After REversing Queue = {}", integerQueueLL.print());
+    Assertions.assertEquals(last, integerQueueLL.front());
+    Assertions.assertEquals(first, integerQueueLL.tail());
   }
 
 }
