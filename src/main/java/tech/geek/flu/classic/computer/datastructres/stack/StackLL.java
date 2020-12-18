@@ -30,7 +30,6 @@ public class StackLL<T> implements StackIfc<T> {
   public T top() {
     if (Objects.isNull(this.top))
       return null;
-    this.size--;
     return this.top.getValue();
   }
 
