@@ -6,6 +6,7 @@ import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListUtils;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -102,5 +103,10 @@ public class StackArray<T> implements StackIfc<T> {
       i++;
       j--;
     }
+  }
+
+  @Override
+  public List<T> toList() {
+    return null;
   }
 }

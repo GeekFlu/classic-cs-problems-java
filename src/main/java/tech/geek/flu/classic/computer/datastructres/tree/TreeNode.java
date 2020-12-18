@@ -9,13 +9,13 @@ import java.util.Objects;
 @Slf4j
 @Getter
 @Setter
-public class Node<T> {
+public class TreeNode<T> {
   private T value;
-  private Node<T> left;
-  private Node<T> right;
+  private TreeNode<T> left;
+  private TreeNode<T> right;
   private boolean isVisited;
 
-  public Node(T value){
+  public TreeNode(T value){
     this.value = value;
   }
 
