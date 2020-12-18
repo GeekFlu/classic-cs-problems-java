@@ -6,6 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListUtils;
 import tech.geek.flu.classic.computer.datastructres.linked.list.Node;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 @Slf4j
@@ -85,5 +88,19 @@ public class StackLL<T> implements StackIfc<T> {
       current = next;
     }
     this.top = prev;
+  }
+
+  @Override
+  public List<T> toList() {
+    if (isEmpty()) {
+      return Collections.emptyList();
+    }
+    List<T> list = new ArrayList<>();
+    Node<T> current = this.top;
+    while (Objects.nonNull(current)) {
+      list.add(current.getValue());
+      current = current.getNext();
+    }
+    return list;
   }
 }

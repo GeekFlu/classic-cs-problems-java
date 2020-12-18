@@ -1,5 +1,7 @@
 package tech.geek.flu.classic.computer.datastructres.stack;
 
+import java.util.List;
+
 public interface StackIfc<T> {
   T pop();
   T top();
@@ -8,4 +10,5 @@ public interface StackIfc<T> {
   boolean isEmpty();
   String print();
   void reverse();
+  List<T> toList();
 }

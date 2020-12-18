@@ -12,7 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 public class BinaryTree<T> {
-  private Node<T> root;
+  private TreeNode<T> root;
 
   public List<T> preOrderTraversal(boolean recursive) {
     if (Objects.isNull(root)) {
@@ -22,6 +22,17 @@ public class BinaryTree<T> {
       return TreeUtils.recursivePreOrderTraversal_DFS(this.root);
     }else{
       return TreeUtils.iterativePreOrderTraversal_DFS(this.root);
+    }
+  }
+
+  public List<T> postOrderTraversal(boolean recursive) {
+    if (Objects.isNull(root)) {
+      return Collections.emptyList();
+    }
+    if(recursive) {
+      return TreeUtils.recursivePostOrderTraversal_DFS(this.root);
+    }else{
+      return TreeUtils.iterativePostOrderTraversal_DFS(this.root);
     }
   }
 
