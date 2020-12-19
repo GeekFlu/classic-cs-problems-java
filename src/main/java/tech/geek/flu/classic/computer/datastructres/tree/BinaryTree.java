@@ -36,5 +36,16 @@ public class BinaryTree<T> {
     }
   }
 
+  public List<T> inOrderTraversal(boolean recursive) {
+    if (Objects.isNull(root)) {
+      return Collections.emptyList();
+    }
+    if(recursive) {
+      return TreeUtils.recursiveInOrderTraversal_DFS(this.root);
+    }else{
+      return TreeUtils.iterativeInOrderTraversal_DFS(this.root);
+    }
+  }
+
 
 }
