@@ -1,15 +1,25 @@
 package tech.geek.flu.classic.computer.datastructres.tree;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Getter
-@Builder
+@Setter
 public class HuffmanNode<T> {
-  private int frequency;
+  private Integer frequency;
   private T value;
   private HuffmanNode<T> left;
   private HuffmanNode<T> right;
+
+  @Override
+  public String toString() {
+    return "HuffmanNode{" +
+        "frequency=" + frequency +
+        ", value=" + value +
+        ", left=" + left +
+        ", right=" + right +
+        '}';
+  }
 }

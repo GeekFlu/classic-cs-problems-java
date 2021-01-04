@@ -14,13 +14,17 @@ import java.util.Objects;
  */
 
 @Slf4j
-public class MinHeap<T extends Number> implements Heap<Number>, Comparator<Number> {
-  private Number[] heap;
+public class MinHeap<T> implements Heap<T> {
+  private T[] heap;
   private int size;
   private static final int CONSTANT_INCREASE = 10;
+  private Class<T> tClass;
+  private Comparator<T> comparator;
 
-  public MinHeap() {
+  public MinHeap(Class<T> tClass, Comparator<T> tComparator) {
     this.size = 0;
+    this.tClass = tClass;
+    this.comparator = tComparator;
   }
 
   public void ensureCapacity() {
@@ -30,17 +34,17 @@ public class MinHeap<T extends Number> implements Heap<Number>, Comparator<Numbe
   }
 
   @Override
-  public Number remove() {
+  public T remove() {
     if (this.size == 1) {
       this.size--;
       return this.heap[0];
     }else if (this.size == 2) {
-      Number removed = this.heap[0];
+      T removed = this.heap[0];
       this.size--;
       swap(0, 1);
       return removed;
     }else if(this.size > 2) {
-      Number removed = this.heap[0];
+      T removed = this.heap[0];
       swap(0, this.size - 1);
       this.size--;
       heapifyDown(0);
@@ -55,22 +59,26 @@ public class MinHeap<T extends Number> implements Heap<Number>, Comparator<Numbe
       int leftChild = leftChild(index);
       int rightChild = rightChild(index);
       if (!outOfBounds(leftChild) && !outOfBounds(rightChild)) {
-        if (compare(this.heap[leftChild], this.heap[rightChild]) < 0) {
+        if (comparison(this.heap[leftChild], this.heap[rightChild]) < 0) {
           // left child is lesser
-          if (compare(this.heap[index], this.heap[leftChild]) > 0) {
+          if (comparison(this.heap[index], this.heap[leftChild]) > 0) {
             swap(index, leftChild);
             index = leftChild;
+          }else {
+            break;
           }
         } else {
-          if (compare(this.heap[index], this.heap[rightChild]) > 0) {
+          if (comparison(this.heap[index], this.heap[rightChild]) > 0) {
             swap(index, rightChild);
             index = rightChild;
+          } else {
+            break;
           }
         }
       }else {
-        if (outOfBounds(leftChild) && !outOfBounds(rightChild) && compare(this.heap[index], this.heap[rightChild]) > 0) {
+        if (outOfBounds(leftChild) && !outOfBounds(rightChild) && comparison(this.heap[index], this.heap[rightChild]) > 0) {
           swap(index, rightChild);
-        }else if(!outOfBounds(leftChild) && outOfBounds(rightChild) && compare(this.heap[index], this.heap[leftChild]) > 0) {
+        }else if(!outOfBounds(leftChild) && outOfBounds(rightChild) && comparison(this.heap[index], this.heap[leftChild]) > 0) {
           swap(index, leftChild);
         }
         break;
@@ -83,7 +91,7 @@ public class MinHeap<T extends Number> implements Heap<Number>, Comparator<Numbe
   }
 
   @Override
-  public void insert(Number value) {
+  public void insert(T value) {
     initializeHeap();
     ensureCapacity();
     this.heap[size] = value;
@@ -94,7 +102,7 @@ public class MinHeap<T extends Number> implements Heap<Number>, Comparator<Numbe
 
   private void heapifyUP(int index) {
     int parent = parent(index);
-    while (parent >= 0 && compare(this.heap[index], this.heap[parent]) < 0) {
+    while (parent >= 0 && comparison(this.heap[index], this.heap[parent]) < 0) {
       swap(parent, index);
       index = parent;
       parent = parent(index);
@@ -102,14 +110,14 @@ public class MinHeap<T extends Number> implements Heap<Number>, Comparator<Numbe
   }
 
   private void swap(int from, int to) {
-    T temp = (T) this.heap[from];
+    T temp = this.heap[from];
     this.heap[from] = this.heap[to];
     this.heap[to] = temp;
   }
 
   private void initializeHeap() {
     if (Objects.isNull(this.heap)) {
-      this.heap = (T[]) Array.newInstance(Number.class, 10);
+      this.heap = (T[]) Array.newInstance(tClass, 10);
     }
   }
 
@@ -134,12 +142,15 @@ public class MinHeap<T extends Number> implements Heap<Number>, Comparator<Numbe
   }
 
   @Override
-  public int compare(Number o1, Number o2) {
-    if (o1 instanceof Integer) {
-      return ((Integer) o1).compareTo(o2.intValue());
-    } else if (o1 instanceof Float) {
-      return ((Float) o1).compareTo(o2.floatValue());
-    }
-    return 0;
+  public boolean isEmpty() {
+    return this.size <= 0;
+  }
+
+  public int comparison(T o1, T o2) {
+    return this.comparator.compare(o1, o2);
+  }
+
+  public void setComparator(Comparator<T> theComparator) {
+    this.comparator = theComparator;
   }
 }
