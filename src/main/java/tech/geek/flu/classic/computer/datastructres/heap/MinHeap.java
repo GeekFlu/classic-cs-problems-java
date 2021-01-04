@@ -34,8 +34,14 @@ public class MinHeap<T extends Number> implements Heap<Number>, Comparator<Numbe
     if (this.size == 1) {
       this.size--;
       return this.heap[0];
-    }else if(this.size > 0) {
+    }else if (this.size == 2) {
       Number removed = this.heap[0];
+      this.size--;
+      swap(0, 1);
+      return removed;
+    }else if(this.size > 2) {
+      Number removed = this.heap[0];
+      swap(0, this.size - 1);
       this.size--;
       heapifyDown(0);
       return removed;
@@ -45,7 +51,35 @@ public class MinHeap<T extends Number> implements Heap<Number>, Comparator<Numbe
   }
 
   private void heapifyDown(int index) {
+    while (!isLeaf(index)) {
+      int leftChild = leftChild(index);
+      int rightChild = rightChild(index);
+      if (!outOfBounds(leftChild) && !outOfBounds(rightChild)) {
+        if (compare(this.heap[leftChild], this.heap[rightChild]) < 0) {
+          // left child is lesser
+          if (compare(this.heap[index], this.heap[leftChild]) > 0) {
+            swap(index, leftChild);
+            index = leftChild;
+          }
+        } else {
+          if (compare(this.heap[index], this.heap[rightChild]) > 0) {
+            swap(index, rightChild);
+            index = rightChild;
+          }
+        }
+      }else {
+        if (outOfBounds(leftChild) && !outOfBounds(rightChild) && compare(this.heap[index], this.heap[rightChild]) > 0) {
+          swap(index, rightChild);
+        }else if(!outOfBounds(leftChild) && outOfBounds(rightChild) && compare(this.heap[index], this.heap[leftChild]) > 0) {
+          swap(index, leftChild);
+        }
+        break;
+      }
+    }
+  }
 
+  private boolean outOfBounds(int index) {
+    return index > (this.size - 1);
   }
 
   @Override
@@ -81,17 +115,17 @@ public class MinHeap<T extends Number> implements Heap<Number>, Comparator<Numbe
 
   @Override
   public boolean isLeaf(int index) {
-    return false;
+    return leftChild(index) > this.size && rightChild(index) > this.size;
   }
 
   @Override
   public int leftChild(int index) {
-    return 0;
+    return (2 * index) + 1;
   }
 
   @Override
   public int rightChild(int index) {
-    return 0;
+    return (2 * index) + 2;
   }
 
   @Override

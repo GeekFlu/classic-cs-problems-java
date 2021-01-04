@@ -7,11 +7,15 @@ import java.util.stream.IntStream;
 
 public class TestUtils {
 
-  public static List<Integer> getSampleData(int numData) {
-    return IntStream.generate(() -> new Random().nextInt(100))
+  public static List<Integer> getSampleData(int numData, int bound) {
+    return IntStream.generate(() -> new Random().nextInt(bound))
         .boxed()
         .limit(numData)
         .collect(Collectors.toList());
+  }
+
+  public static List<Integer> getSampleData(int numData) {
+    return getSampleData(numData, 100);
   }
 
 }
