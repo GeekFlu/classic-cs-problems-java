@@ -10,7 +10,8 @@ import java.util.Objects;
 @Slf4j
 public class TreeUtils {
 
-  private TreeUtils(){}
+  private TreeUtils() {
+  }
 
   public static <T> List<T> iterativePreOrderTraversal_DFS(TreeNode<T> root) {
     StackLL<TreeNode<T>> tracker = new StackLL<>();
@@ -40,7 +41,7 @@ public class TreeUtils {
   }
 
   private static <T> void preOrder(TreeNode<T> root, List<T> traversalOrder) {
-    if(Objects.isNull(root)) {
+    if (Objects.isNull(root)) {
       return;
     }
     // add data to list
@@ -60,7 +61,7 @@ public class TreeUtils {
   }
 
   private static <T> void postOrder(TreeNode<T> root, List<T> traversalOrder) {
-    if(Objects.isNull(root)) {
+    if (Objects.isNull(root)) {
       return;
     }
     // we traverse left sub ree
@@ -74,7 +75,7 @@ public class TreeUtils {
   }
 
   private static <T> void inOrder(TreeNode<T> root, List<T> traversalOrder) {
-    if(Objects.isNull(root)) {
+    if (Objects.isNull(root)) {
       return;
     }
     // we traverse left sub ree
@@ -100,5 +101,35 @@ public class TreeUtils {
         stackLL.push(current.getRight());
     }
     return traversalOrder.toList();
+  }
+
+  public static <T> List<T> iterativeInOrderTraversal_DFS(TreeNode<T> root) {
+    StackLL<TreeNode<T>> stackLL = new StackLL<>();
+    stackLL.push(root);
+    TreeNode<T> current = root;
+    List<T> traversal = new ArrayList<>();
+    // traverse the tree
+    while (current != null || stackLL.size() > 0) {
+      /* Reach the left most Node of the curr Node */
+      while (current != null) {
+        /* place pointer to a tree node on the stack before traversing the node's left subtree */
+        stackLL.push(current);
+        current = current.getLeft();
+      }
+
+      /* Current must be NULL at this point */
+      current = stackLL.pop();
+
+      traversal.add(current.getValue());
+      /* we have visited the node and its left subtree.  Now, it's right subtree's turn */
+      current = current.getRight();
+    }
+    return traversal;
+  }
+
+  public static <T> List<T> recursiveInOrderTraversal_DFS(TreeNode<T> root) {
+    List<T> traversal = new ArrayList<>();
+    inOrder(root, traversal);
+    return traversal;
   }
 }

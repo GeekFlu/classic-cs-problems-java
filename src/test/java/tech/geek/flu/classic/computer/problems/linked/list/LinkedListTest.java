@@ -5,10 +5,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedList;
 import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListIfc;
+import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListProblems;
 import tech.geek.flu.classic.computer.datastructres.linked.list.LinkedListUtils;
 import tech.geek.flu.classic.computer.datastructres.linked.list.Node;
 import tech.geek.flu.classic.computer.exception.LinkedListException;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Slf4j
@@ -152,6 +154,42 @@ class LinkedListTest {
     List<Integer> expected = List.of(110, 120, 210, 220, 310, 320, 410, 520);
     Assertions.assertEquals(expected, mergedList.toList());
 
+  }
+
+  @Test
+  void remove_duplicates_unsorted_linked_list() {
+    LinkedList<Integer> linkedList = new LinkedList<>();
+    linkedList.append(-1);
+    linkedList.append(3);
+    linkedList.append(-1);
+    linkedList.append(7);
+    linkedList.append(10);
+    linkedList.append(7);
+    linkedList.append(3);
+
+    LinkedListProblems.removeDuplicates(linkedList);
+    Assertions.assertNotNull(linkedList);
+    Assertions.assertEquals(List.of(-1, 3, 7, 10), linkedList.toList());
+
+    linkedList = new LinkedList<>();
+    linkedList.append(-1);
+    linkedList.append(-1);
+    linkedList.append(-1);
+    linkedList.append(-1);
+    linkedList.append(-1);
+    linkedList.append(7);
+    LinkedListProblems.removeDuplicates(linkedList);
+    Assertions.assertEquals(List.of(-1, 7), linkedList.toList());
+
+    linkedList = new LinkedList<>();
+    linkedList.append(-1);
+    linkedList.append(-1);
+    linkedList.append(-1);
+    linkedList.append(-1);
+    linkedList.append(-1);
+    linkedList.append(-1);
+    LinkedListProblems.removeDuplicates(linkedList);
+    Assertions.assertEquals(List.of(-1), linkedList.toList());
   }
 
 }
