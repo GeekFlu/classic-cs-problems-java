@@ -7,4 +7,5 @@ public interface Heap<T> {
   int leftChild(int i);
   int rightChild(int i);
   int parent(int i);
+  boolean isEmpty();
 }

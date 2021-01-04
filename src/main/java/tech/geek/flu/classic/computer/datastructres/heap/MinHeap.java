@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 
 @Slf4j
-public class MinHeap<T> implements Heap<T>, Comparator<T> {
+public class MinHeap<T> implements Heap<T> {
   private T[] heap;
   private int size;
   private static final int CONSTANT_INCREASE = 10;
@@ -64,11 +64,15 @@ public class MinHeap<T> implements Heap<T>, Comparator<T> {
           if (comparison(this.heap[index], this.heap[leftChild]) > 0) {
             swap(index, leftChild);
             index = leftChild;
+          }else {
+            break;
           }
         } else {
           if (comparison(this.heap[index], this.heap[rightChild]) > 0) {
             swap(index, rightChild);
             index = rightChild;
+          } else {
+            break;
           }
         }
       }else {
@@ -138,13 +142,8 @@ public class MinHeap<T> implements Heap<T>, Comparator<T> {
   }
 
   @Override
-  public int compare(T o1, T o2) {
-    if (o1 instanceof Integer) {
-      return ((Integer) o1).compareTo((Integer) o2);
-    } else if (o1 instanceof Float) {
-      return ((Float) o1).compareTo((Float) o2);
-    }
-    return 0;
+  public boolean isEmpty() {
+    return this.size <= 0;
   }
 
   public int comparison(T o1, T o2) {

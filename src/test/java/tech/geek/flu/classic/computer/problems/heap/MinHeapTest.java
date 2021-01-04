@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tech.geek.flu.classic.computer.datastructres.heap.MinHeap;
+import tech.geek.flu.classic.computer.datastructres.tree.HuffmanNode;
 import tech.geek.flu.classic.computer.problems.TestUtils;
 
 import java.util.Comparator;
@@ -53,6 +54,32 @@ class MinHeapTest {
     }
     ll.sort(Integer::compareTo);
     Assertions.assertEquals(ll.get(0), minHeap.remove());
+  }
+
+  @Test
+  void test_min_heap_creation_custom_object() {
+    Comparator<HuffmanNode<Character>> tComp = Comparator.comparing(HuffmanNode::getFrequency);
+    MinHeap<HuffmanNode<Character>> minHeap = new MinHeap(HuffmanNode.class, tComp);
+
+    Assertions.assertNull(minHeap.remove());
+
+    List<HuffmanNode<Character>> huffmanNodeList = TestUtils.getHuffmanNodes(100);
+    for (HuffmanNode<Character> node: huffmanNodeList) {
+      minHeap.insert(node);
+    }
+
+    huffmanNodeList.sort(tComp);
+    Assertions.assertNotNull(minHeap);
+    Assertions.assertEquals(huffmanNodeList.get(0), minHeap.remove());
+    Assertions.assertEquals(huffmanNodeList.get(1).getFrequency(), minHeap.remove().getFrequency());
+    HuffmanNode<Character> hn = minHeap.remove();
+    while (hn != null) {
+      log.info("Frequency = {}, character = {}", hn.getFrequency(), hn.getValue());
+      hn = minHeap.remove();
+    }
+    // No element should be in the min heap
+    Assertions.assertNull(minHeap.remove());
+    Assertions.assertTrue(minHeap.isEmpty());
   }
 
 }
