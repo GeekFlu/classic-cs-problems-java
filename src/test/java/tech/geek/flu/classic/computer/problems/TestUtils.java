@@ -39,7 +39,7 @@ public class TestUtils {
     }
     for (Character ch : maps.keySet()) {
       HuffmanNode<Character> characterHuffmanNode = new HuffmanNode<>();
-      characterHuffmanNode.setValue(ch);
+      characterHuffmanNode.setLetter(ch);
       characterHuffmanNode.setFrequency(maps.get(ch));
       nodes.add(characterHuffmanNode);
     }
