@@ -43,11 +43,13 @@ public class Huffman {
     while (minHeap.size() > 1) {
       HuffmanNode<Character> h1 = minHeap.remove();
       HuffmanNode<Character> h2 = minHeap.remove();
+
       if (h2.getFrequency() <= h1.getFrequency()) {
         HuffmanNode<Character> temp = h2;
         h2 = h1;
         h1 = temp;
       }
+
       HuffmanNode<Character> internal = new HuffmanNode<>();
       internal.setFrequency(h1.getFrequency() + h2.getFrequency());
       internal.setLeft(h1);
@@ -61,6 +63,24 @@ public class Huffman {
     generateEncodedText(stringHashMap);
 
     return new ImmutablePair(this.textEncoded, this.huffmanTree);
+  }
+
+  public String decode() {
+    HuffmanNode<?> current = this.huffmanTree;
+    StringBuilder decodedString = new StringBuilder();
+    for (Character bitChar : textEncoded.toCharArray()) {
+      if (bitChar == '0' && current.hasLeft()) {
+        current = current.getLeft();
+      }else if(current.hasRight()) {
+        current = current.getRight();
+      }
+
+      if (current.isLeaf()) {
+        decodedString.append(current.getLetter());
+        current = this.huffmanTree;
+      }
+    }
+    return decodedString.toString();
   }
 
   private void generateEncodedText(HashMap<Character, String> stringHashMap) {

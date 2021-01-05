@@ -23,4 +23,16 @@ public class HuffmanNode<T> {
         ", right=" + right +
         '}';
   }
+
+  public boolean hasLeft() {
+    return this.left != null;
+  }
+
+  public boolean hasRight() {
+    return this.right != null;
+  }
+
+  public boolean isLeaf() {
+    return !hasLeft() && !hasRight();
+  }
 }

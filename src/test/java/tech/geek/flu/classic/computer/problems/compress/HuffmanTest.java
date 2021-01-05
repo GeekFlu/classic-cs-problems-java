@@ -21,6 +21,11 @@ class HuffmanTest {
     log.info("Huffman root tree = {}", immutablePair.right);
     Assertions.assertNotNull(immutablePair);
     Assertions.assertEquals("1010101010101000100100111111111111111000000010101010101", immutablePair.left);
+
+    String textToEncodeBig = "Una familia, compuesta por dos pequeños y sus padres, viajaban por carretera hacia [....] cuando el coche se les averió. Los padres salieron a buscar ayuda y, para que los niños no se aburrieran, les dejaron con la radio encendida. Cayó la noche y los padres seguían sin volver cuando escucharon una inquietante noticia en la radio: un asesino muy peligroso se había escapado de un centro penitenciario cercano a [....] y pedían que se extremaran las precauciones.";
+    huffman.setTextToEncode(textToEncodeBig);
+    immutablePair = huffman.encode();
+    Assertions.assertEquals(textToEncodeBig, huffman.decode());
   }
 
   @Test
