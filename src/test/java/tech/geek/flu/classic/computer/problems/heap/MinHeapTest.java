@@ -74,7 +74,7 @@ class MinHeapTest {
     Assertions.assertEquals(huffmanNodeList.get(1).getFrequency(), minHeap.remove().getFrequency());
     HuffmanNode<Character> hn = minHeap.remove();
     while (hn != null) {
-      log.info("Frequency = {}, character = {}", hn.getFrequency(), hn.getValue());
+      log.info("Frequency = {}, character = {}", hn.getFrequency(), hn.getLetter());
       hn = minHeap.remove();
     }
     // No element should be in the min heap

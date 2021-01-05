@@ -8,4 +8,5 @@ public interface Heap<T> {
   int rightChild(int i);
   int parent(int i);
   boolean isEmpty();
+  int size();
 }

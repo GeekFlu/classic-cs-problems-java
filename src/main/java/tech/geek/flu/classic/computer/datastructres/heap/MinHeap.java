@@ -146,6 +146,11 @@ public class MinHeap<T> implements Heap<T> {
     return this.size <= 0;
   }
 
+  @Override
+  public int size() {
+    return this.size;
+  }
+
   public int comparison(T o1, T o2) {
     return this.comparator.compare(o1, o2);
   }
